@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(Playground)
+project(CPPPlayground)
 message(STATUS "start running cmake")
 
 set(CMAKE_CXX_STANDARD 14)
@@ -19,5 +19,5 @@ else()
 endif()
 
 
-add_executable(Playground main.cpp)
-target_link_libraries(Playground ${LIB_GLOG} ${LIB_FOLLY})
+add_executable(CPPPlayground main.cpp)
+target_link_libraries(CPPPlayground ${LIB_GLOG} ${LIB_FOLLY})

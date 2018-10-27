@@ -1,6 +1,11 @@
 #include <iostream>
+#include <folly/futures/Future.h>
+
+using namespace folly;
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Future<Unit> fu = makeFuture(42).unit();
+    cout << fu.isReady();
     return 0;
 }
