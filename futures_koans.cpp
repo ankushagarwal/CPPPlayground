@@ -5,25 +5,32 @@
 using namespace std;
 using namespace folly;
 
-TEST(Values, canonicalForm) {
-    Future<int> answer(42);
-    EXPECT_EQ(42, std::move(answer).get());
-}
+using std::string;
+class MemcacheClient {
+public:
+    struct GetReply {
+        enum class Result {
+            FOUND,
+            NOT_FOUND,
+            SERVER_ERROR,
+        };
 
-TEST(Values, typeDeduction) {
-    // If you use makeFuture, the compiler will deduce the type.
-    auto answer = makeFuture(42);
-    EXPECT_EQ(42, std::move(answer).get());
-}
+        Result result;
+        // The value when result is FOUND,
+        // The error message when result is SERVER_ERROR or CLIENT_ERROR
+        // undefined otherwise
+        string value;
+    };
 
-TEST(Values, exceptionNeedsType) {
-    // To create a Future holding an exception, you must
-    // use makeFuture with the type
-    std::runtime_error err("Don't Panic");
-    auto question = makeFuture<std::runtime_error>(err);
-    // not
-    //auto question = makeFuture(err);
-    EXPECT_THROW(std::move(question).get(), std::runtime_error);
+    GetReply get(string key) {
+        return GetReply{.result = GetReply::Result::FOUND, .value = "some value"};
+    }
+
+    SemiFuture<GetReply> future_get(string key);
+};
+
+TEST(Futures, Basics) {
+
 }
 
 int main(int argc, char **argv) {
