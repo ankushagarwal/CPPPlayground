@@ -17,6 +17,7 @@ else()
     message(STATUS "LIB_GLOG location ${LIB_GLOG}")
 endif()
 
+# Install googletest from https://github.com/google/googletest/
 find_library(LIB_GTEST gtest)
 if(NOT LIB_GTEST)
     message(FATAL_ERROR "libgtest not found")
