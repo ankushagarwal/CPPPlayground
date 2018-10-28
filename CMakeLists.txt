@@ -36,6 +36,6 @@ else()
 endif()
 
 
-add_executable(CPPPlayground futures_koans.cpp)
+add_executable(CPPPlayground main.cpp)
 
 target_link_libraries(CPPPlayground ${LIB_GLOG} ${LIB_FOLLY} ${LIB_GTEST})
